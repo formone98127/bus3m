@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="zh-Hant-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>3M 梅窩 ⇄ 東涌｜下班車幾點到（實時）</title>
+<meta name="description" content="大嶼山巴士 3M（梅窩碼頭 ⇄ 東涌站巴士總站）即時到站倒數、完整時間表、班次備註。">
+<meta name="theme-color" content="#0b3d91">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{--bg:#0d1b2a;--card:#16263a;--line:#24374f;--fg:#eaf1fa;--mut:#93a6bf;--blue:#2f6fd0;--amber:#ffc861;--green:#2bb673;--red:#ff7b72}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:"Noto Sans TC","PingFang HK","Microsoft JhengHei",system-ui,sans-serif;line-height:1.5}
+.wrap{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.badge{background:var(--blue);color:#fff;font-weight:800;font-size:22px;padding:6px 12px;border-radius:10px}
+.route{font-size:15px;color:var(--mut)}
+.route b{color:var(--fg);display:block;font-size:17px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 16px}
+.tabs button{background:var(--card);border:1px solid var(--line);color:var(--mut);border-radius:12px;padding:11px 8px;font-size:14px;font-weight:700;cursor:pointer}
+.tabs button.on{background:rgba(47,111,208,.18);border-color:var(--blue);color:#fff}
+.tip{background:#132437;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13px;color:var(--mut);margin-bottom:16px}
+.next{display:grid;gap:10px;margin-bottom:22px}
+.dep{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.dep .t{font-size:30px;font-weight:800;font-variant-numeric:tabular-nums}
+.dep .m{font-size:14px;color:var(--amber);font-weight:700;text-align:right}
+.dep .m.soon{color:var(--red)}
+.dep .meta{font-size:12px;color:var(--mut)}
+.src{font-size:11px;padding:2px 7px;border-radius:999px;margin-left:6px}
+.src.live{background:rgba(43,182,115,.15);color:var(--green);border:1px solid rgba(43,182,115,.4)}
+.src.sched{background:rgba(147,166,191,.12);color:var(--mut);border:1px solid var(--line)}
+h2{font-size:16px;margin:26px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:14px;color:var(--mut);margin:16px 0 6px;font-weight:500}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px 10px;font-variant-numeric:tabular-nums;font-size:15px}
+.grid span{padding:3px 0}
+.grid span.past{color:#4d5f76}
+.grid span sup{color:var(--amber);font-size:11px}
+.grid.sun span{color:#ffb3a7}
+.legend{font-size:12.5px;color:var(--mut);margin-top:12px;display:grid;gap:6px}
+.legend b{color:var(--fg)}
+.note{background:#132437;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13px;color:var(--mut);margin-top:16px}
+footer{margin-top:26px;font-size:12px;color:#64748b;text-align:center}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <span class="badge">3M</span>
+    <span class="route"><b id="dirTitle">梅窩碼頭 → 東涌站巴士總站</b>大嶼山巴士（NLB）</span>
+  </div>
+
+  <div class="tabs">
+    <button type="button" data-dir="a" class="on">梅窩 → 東涌</button>
+    <button type="button" data-dir="b">東涌 → 梅窩</button>
+  </div>
+
+  <div class="tip">提示：撳瀏覽器「分享」或「選單」→「加至主畫面」，即可好似 App 咁一撳即開。</div>
+
+  <div id="next" class="next"></div>
+
+  <section id="ttA">
+    <h2>梅窩碼頭開出</h2>
+    <h3 id="daylabel">星期一至六</h3>
+    <div id="tt" class="grid"></div>
+    <div class="legend">
+      <div><b>S</b>　只限星期一至五（學校假期除外），不經梅窩舊墟</div>
+      <div><b>#</b>　經北大嶼山醫院</div>
+    </div>
+    <h2>貝澳（老圍村）開出</h2>
+    <h3>星期一至五（學校假期除外）</h3>
+    <div class="grid"><span>06:50</span><span>07:20</span><span>08:20</span></div>
+  </section>
+
+  <section id="ttB" class="hidden">
+    <h2>東涌站巴士總站開出</h2>
+    <div class="note">東涌開出嘅官方時間表未收錄（手頭上只有梅窩開出時間表）。本方向以 <b>實時到站資料</b> 為準；有官方時間表圖就可以補成同梅窩方向一樣嘅完整班次。</div>
+  </section>
+
+  <div class="note">
+    全程 $12.5（假日 $19.6）；此路線設有雙向分段收費。班次以營辦商最新公佈為準。
+  </div>
+
+  <footer>下班車 · 3M｜時間表抄自 NLB 官方｜實時數據：data.gov.hk（每 30 秒更新）<span id="upd"></span></footer>
+</div>
+
+<script>
+const DIRS = {
+  a: { title: "梅窩碼頭 → 東涌站巴士總站", routeId: 7, stopId: 1, hasTimetable: true },
+  b: { title: "東涌站巴士總站 → 梅窩碼頭", routeId: 6, stopId: 278, hasTimetable: false }
+};
+let dir = "a";
+
+const MON_SAT = [
+  ["06:00"],["06:20","#"],["06:40"],["06:55"],["07:05","S"],["07:10"],["07:15","S"],["07:20","#"],
+  ["07:40"],["07:55"],["08:15"],["08:35"],["08:55"],["09:20"],["09:45","#"],["10:10"],["10:35"],
+  ["10:55"],["11:20"],["11:45"],["12:05","#"],["12:25"],["12:50"],["13:10"],["13:35"],["14:00"],
+  ["14:20","#"],["14:45"],["15:05"],["15:25"],["15:50"],["16:10"],["16:25"],["16:45"],["17:00","#"],
+  ["17:15"],["17:30"],["17:45"],["18:00"],["18:15"],["18:35"],["19:00"],["19:30"],["20:00","#"],
+  ["20:30"],["21:00"],["21:30"],["22:25"],["23:05"],["23:45"]
+];
+const SUN = [
+  ["06:20"],["06:40"],["07:00"],["07:20","#"],["07:40"],["08:00"],["08:20"],["08:40"],["09:00"],
+  ["09:20"],["09:40"],["10:00"],["10:20","#"],["10:40"],["11:00"],["11:20"],["11:40"],["12:00","#"],
+  ["12:15"],["12:30"],["12:45"],["13:00"],["13:15"],["13:30"],["13:45"],["14:00"],["14:15","#"],
+  ["14:30"],["14:45"],["15:00"],["15:15"],["15:30"],["15:45"],["16:00"],["16:15"],["16:30"],
+  ["16:45"],["17:00","#"],["17:15"],["17:30"],["17:45"],["18:00"],["18:15"],["18:30"],["18:45"],
+  ["19:00"],["19:15"],["19:30"],["19:50","#"],["20:10"],["20:35"],["21:00"],["21:30"],["22:25"],
+  ["23:05"],["23:45"]
+];
+
+const pad = n => String(n).padStart(2, "0");
+const toMin = ([h, m]) => (+h) * 60 + (+m);
+
+function hkParts(now = new Date()) {
+  const f = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Hong_Kong", hour12: false,
+    weekday: "short", hour: "2-digit", minute: "2-digit", second: "2-digit"
+  }).formatToParts(now);
+  const g = k => f.find(x => x.type === k)?.value || "0";
+  return { weekday: g("weekday"), h: +g("hour"), m: +g("minute"), s: +g("second") };
+}
+const nowMin = () => { const p = hkParts(); return p.h * 60 + p.m + p.s / 60; };
+const isSunday = () => hkParts().weekday === "Sun";
+
+let live = { dir: null, list: [], ok: false };
+
+async function fetchEta() {
+  const d = DIRS[dir];
+  const url = `https://rt.data.gov.hk/v2/transport/nlb/stop.php?action=estimatedArrivals&routeId=${d.routeId}&stopId=${d.stopId}&language=en`;
+  try {
+    const r = await fetch(url, { cache: "no-store" });
+    const j = await r.json();
+    const arr = (j.estimatedArrivals || [])
+      .filter(x => !x.departed)
+      .map(x => ({
+        hm: x.estimatedArrivalTime.slice(11, 16),
+        at: new Date(x.estimatedArrivalTime.replace(" ", "T") + "+08:00"),
+        noGps: !!x.noGPS
+      }));
+    live = { dir, list: arr, ok: true };
+    const u = document.getElementById("upd");
+    if (u) u.textContent = "｜上次更新 " + new Date().toLocaleTimeString("en-GB", { timeZone: "Asia/Hong_Kong", hour12: false });
+  } catch (e) {
+    live = { ...live, ok: false };
+  }
+  render();
+}
+
+function renderTimetable(units, sunday) {
+  const el = document.getElementById("tt");
+  el.className = "grid" + (sunday ? " sun" : "");
+  const t = nowMin();
+  el.innerHTML = units.map(([hm, mark]) => {
+    const cls = toMin(hm.split(":")) < t ? "past" : "";
+    const sup = mark ? `<sup>${mark}</sup>` : "";
+    return `<span class="${cls}">${hm}${sup}</span>`;
+  }).join("");
+  document.getElementById("daylabel").textContent = sunday ? "星期日及公眾假期" : "星期一至六";
+}
+
+function render() {
+  const d = DIRS[dir];
+  document.getElementById("dirTitle").textContent = d.title;
+  document.getElementById("ttA").classList.toggle("hidden", !d.hasTimetable);
+  document.getElementById("ttB").classList.toggle("hidden", d.hasTimetable);
+
+  const sunday = isSunday();
+  if (d.hasTimetable) renderTimetable(sunday ? SUN : MON_SAT, sunday);
+
+  const box = document.getElementById("next");
+  const usingLive = live.ok && live.dir === dir && live.list.length;
+  let cards = [];
+
+  if (usingLive) {
+    const nowMs = Date.now();
+    cards = live.list
+      .map(x => ({ hm: x.hm, at: x.at, gps: !x.noGps }))
+      .filter(x => x.at.getTime() > nowMs - 60_000)
+      .slice(0, 3)
+      .map(x => ({ hm: x.hm, diff: Math.max(0, (x.at.getTime() - Date.now()) / 60000), live: true, gps: x.gps }));
+  } else if (d.hasTimetable) {
+    const t = nowMin();
+    cards = (sunday ? SUN : MON_SAT)
+      .map(([hm, mark]) => ({ hm, mark, mins: toMin(hm.split(":")) }))
+      .filter(x => x.mins >= t)
+      .slice(0, 3)
+      .map(x => ({ hm: x.hm, diff: x.mins - t, live: false, mark: x.mark }));
+  }
+
+  if (!cards.length) {
+    box.innerHTML = `<div class="dep"><div><div class="t">—</div><div class="meta">暫時冇班次資料</div></div><div class="m">—</div></div>`;
+    return;
+  }
+
+  box.innerHTML = cards.map((x, i) => {
+    const hh = Math.floor(x.diff / 60), mm = Math.floor(x.diff % 60), ss = Math.floor((x.diff * 60) % 60);
+    const label = x.diff < 60 ? `${mm} 分 ${pad(ss)} 秒` : `${hh} 小時 ${mm} 分`;
+    const soon = x.diff < 10 ? " soon" : "";
+    const tag = (x.mark ? `${x.mark} ` : "") + (i === 0 ? "下一班" : "");
+    const src = x.live
+      ? `<span class="src live">實時${x.gps === false ? "·無 GPS" : ""}</span>`
+      : `<span class="src sched">時間表</span>`;
+    return `<div class="dep">
+      <div><div class="t">${x.hm}</div><div class="meta">${tag}${src}</div></div>
+      <div class="m${soon}">${label}</div>
+    </div>`;
+  }).join("");
+}
+
+document.querySelectorAll(".tabs button").forEach(b => {
+  b.addEventListener("click", () => {
+    document.querySelectorAll(".tabs button").forEach(x => x.classList.remove("on"));
+    b.classList.add("on");
+    dir = b.dataset.dir;
+    live = { dir: null, list: [], ok: false };
+    render();
+    fetchEta();
+  });
+});
+
+render();
+fetchEta();
+setInterval(render, 1000);
+setInterval(fetchEta, 30000);
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js").catch(() => {});
+}
+</script>
+</body>
+</html>
