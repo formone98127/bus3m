@@ -1,5 +1,5 @@
 /* 3M 下班車 — 只快取靜態檔；API 一定走網絡 */
-const CACHE = "bus3m-v1";
+const CACHE = "bus3m-v2";
 const ASSETS = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", e => {
